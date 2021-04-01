@@ -41,13 +41,13 @@ func GetConfig(yamlBytes []byte) (Config, error) {
 func validateData(config Config) (Config, error) {
 	for _, v := range config.Languages {
 		if v.Path == "" {
-			return Config{}, fmt.Errorf("language path must not be empty")
+			return Config{}, fmt.Errorf("language path must not be empty. Please update config.yaml")
 		} else if len(v.Acros) == 0 {
-			return Config{}, fmt.Errorf("language acros must not be empty")
+			return Config{}, fmt.Errorf("language acros must not be empty. Please update config.yaml")
 		}
 	}
 	if config.DefaultEditorPath == "" {
-		return Config{}, fmt.Errorf("DefaultEditorPath must not be empty")
+		return Config{}, fmt.Errorf("DefaultEditorPath must not be empty. Please update config.yaml")
 	}
 
 	return config, nil

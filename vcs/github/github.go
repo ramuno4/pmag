@@ -1,8 +1,9 @@
 package github
 
 import (
+	_ "embed"
 	"context"
-	"io/ioutil"
+	// "io/ioutil"
 	"path/filepath"
 
 	"github.com/Jon1105/pmag/utilities"
@@ -12,25 +13,10 @@ import (
 	"golang.org/x/oauth2"
 )
 
-func getKey() (string, error) {
-	var path, err1 = filepath.Abs("github.key")
-	if err1 != nil {
-		return "", err1
-	}
-
-	var key, err2 = ioutil.ReadFile(path)
-	if err2 != nil {
-		return "", err2
-	}
-	return string(key), nil
-
-}
+//go:embed github.key
+var key string
 
 func createRepo(repoName string, private bool) (*github.Repository, error) {
-	key, err1 := getKey()
-	if err1 != nil {
-		return nil, err1
-	}
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: key},
 	)

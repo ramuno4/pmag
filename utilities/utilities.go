@@ -12,6 +12,7 @@ import (
 )
 
 func Remove(slice []string, i int) []string {
+	fmt.Println(slice)
 	return append(slice[:i], slice[i+1:]...)
 }
 
@@ -94,4 +95,19 @@ func RunCommand(dir, name string, arg ...string) error {
 	cmd.Stderr = os.Stderr
 	cmd.Stdin = os.Stdin
 	return cmd.Run()
+}
+
+func Filter(array []string, filter func(string) bool) ([]string, []string) {
+	var valid = []string{}
+	var invalid = []string{}
+
+	for _, v := range array {
+		if filter(v) {
+			valid = append(valid, v)
+		} else {
+			invalid = append(invalid, v)
+		}
+	}
+
+	return valid, invalid
 }

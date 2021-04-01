@@ -5,5 +5,5 @@ import (
 )
 
 func Git(path string) error {
-	return utilities.RunCommand("", "git", "init", "path")
+	return utilities.RunCommand("", "git", "init", path)
 }

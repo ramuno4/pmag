@@ -28,31 +28,25 @@ func main() {
 	if len(osArgs) == 1 {
 		osArgs = append(osArgs, "help")
 	}
+	var args, flags = utilities.Filter(osArgs, func(str string) bool {
+		return str[:1] != "-"
+	})
 
-	// filter out all flags
-	var flags []string
-	for i, v := range osArgs {
-		if v[:1] == "-" {
-			osArgs = utilities.Remove(osArgs, i)
-			flags = append(flags, v)
-		}
-	}
-
-	var command string = osArgs[1]
+	var command string = args[1]
 
 	var err2 error
 
 	switch command {
 	case "create":
-		err2 = create.Create(osArgs, flags, conf)
+		err2 = create.Create(args, flags, conf)
 	case "open":
-		err2 = open.Open(osArgs, flags, conf)
+		err2 = open.Open(args, flags, conf)
 	// case "vcs":
-	// 	err2 = vcs.Vcs(osArgs, flags, conf)
+	// 	err2 = vcs.Vcs(args, flags, conf)
 	case "help":
-		err2 = help.Help(osArgs, conf)
+		err2 = help.Help(args, conf)
 	default:
-		log.Fatalf("invalid command %s\nUse `%s help` to see a list of commands", command, osArgs[0])
+		log.Fatalf("invalid command %s\nUse `%s help` to see a list of commands", command, args[0])
 	}
 
 	if err2 != nil {

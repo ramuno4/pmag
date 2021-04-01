@@ -64,7 +64,7 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 			}
 		}
 	} else if nArgs > 3 { // pmag open flutter doit [extra arguments ignored]
-		var input string = osArgs[2]
+		var input string = osArgs[3]
 		if num, err5 := strconv.Atoi(input); err5 == nil {
 			if num <= len(projects) {
 				return utilities.Open(filepath.Join(lang.Path, projects[num-1].Name()), editorPath)
@@ -80,7 +80,7 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 		if exists {
 			return utilities.Open(path, editorPath)
 		} else if !exists {
-			return fmt.Errorf("%q is does not exist\nUse `%s create` to create a project", path, osArgs[0])
+			return fmt.Errorf("%q does not exist\nUse `%s create` to create a project", path, osArgs[0])
 		}
 	}
 	return nil // all possible value of nArgs accounted for previously
