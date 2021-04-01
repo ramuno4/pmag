@@ -54,6 +54,5 @@ func Github(projectPath string, private bool) error {
 	if err2 != nil {
 		return err2
 	}
-
-	return utilities.RunCommand(projectPath, "git", "remote", "add", "origin", *repo.GitURL)
+	return utilities.RunCommand(projectPath, "git", "remote", "add", "origin", *repo.CloneURL)
 }
