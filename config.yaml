@@ -1,0 +1,49 @@
+# List of languages
+languages:
+  - 
+    # Name of the language, used for recognition purposes 
+    name:
+
+    # strings used to select language in arguments. i.e. pmag *py*
+    acros: []
+
+    # path to projects folder of this language
+    path:
+
+    # (optional) path to the example directory that is copied when a new project is created
+    templatePath:
+
+    # (optional) command to execute in terminal upon creation of the project
+    # can include {{projectName}} or {{projectPath}} variables which will be replaced by their respective values at runtime.
+    initialCommand:
+
+    # (optional) same as `defaultEditorPath` below but optional and language specific. This is the preferred editor path when specified
+    editorPath:
+
+# (optional) version control system to initialize upon creation of a new project
+# Currently only github and git are supported
+vcs:
+
+# DEFAULTS
+
+# path to the script or executable to open editor of choice
+# i.e. C:/path/to/Code.exe
+# Note, this script or executable should open a folder when run with the following command structure:
+# $ {{defaultEditorPath}} {{projectPath}}     
+defaultEditorPath:
+
+# (optional) whether the version control system is enabled by default:
+# this will determine whether the -v tag will turn on or off vcs
+# defaults to false
+defaultVcsState: 
+
+# (optional) whether a created github repository will default to public (true) or private(false)
+# defaults to false
+defaultGithubVisibility: 
+
+
+# (optional) whether creation of a README.md file is enabled by default
+# defaults to false
+defaultCreateREADME:
+
+

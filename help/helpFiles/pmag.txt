@@ -1,0 +1,18 @@
+pmag: Manage your local multilingual projects with a simple cli
+
+Common commands:
+    pmag open go <project name>
+     Opens your golang project inside your specified editor
+
+    pmag create flutter <project name>
+     Create a Flutter project and open if inside your specified editor
+     Automatically calls "flutter create <project name>"
+
+Available commands:
+    open           open the specified project
+    create         create a project with the correct template
+    vcs            initialize a version control system in the specified project
+    help           show this help message
+
+
+Run "pmag help <command>" for more information about a specific command

@@ -1,0 +1,4 @@
+Open a project in your editor of choice
+
+Usage:
+    pmag open <language> <project name>

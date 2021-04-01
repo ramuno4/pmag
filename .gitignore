@@ -1,0 +1,4 @@
+vcs/github/github.key
+*.exe
+templates/*
+configEx.yaml
