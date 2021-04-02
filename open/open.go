@@ -1,7 +1,6 @@
 package open
 
 import (
-	"bufio"
 	"fmt"
 	"path/filepath"
 	"strconv"
@@ -9,9 +8,6 @@ import (
 	"github.com/Jon1105/pmag/conf"
 	"github.com/Jon1105/pmag/help"
 	"github.com/Jon1105/pmag/utilities"
-
-	"io/ioutil"
-	"os"
 )
 
 func Open(osArgs []string, flags []string, config conf.Config) error {
@@ -28,41 +24,17 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 		return err2
 	}
 
-	var projects, err3 = getProjects(lang.Path)
+	var projects, err3 = utilities.GetProjects(lang.Path)
 	if err3 != nil {
 		return err3
 	}
 	if nArgs == 3 { // pmag open flutter
-		// Print all Projects
-		for index, file := range projects {
-			fmt.Printf("%d: %s\n", index+1, file.Name())
+		var projectPath, err4 = utilities.PickProject(lang, projects)
+		if err4 != nil {
+			return err4
 		}
+		return utilities.Open(projectPath, editorPath)
 
-		var scanner *bufio.Scanner = bufio.NewScanner(os.Stdin)
-		for {
-			fmt.Print("Pick a project: ")
-			scanner.Scan()
-			var input string = scanner.Text()
-			if num, err := strconv.Atoi(input); err == nil && num <= len(projects) {
-				return utilities.Open(filepath.Join(lang.Path, projects[num-1].Name()), editorPath)
-			} else if input == "q" {
-				return nil
-			} else if input == "" {
-				continue
-			} else { // input == "." || input == "doit"
-				var path string = filepath.Join(lang.Path, input)
-				var exists, err4 = utilities.Exists(path)
-				if err4 != nil {
-					return err4
-				}
-				if exists {
-					return utilities.Open(path, editorPath)
-				} else if !exists {
-					fmt.Println("Invalid Entry")
-					continue
-				}
-			}
-		}
 	} else if nArgs > 3 { // pmag open flutter doit [extra arguments ignored]
 		var input string = osArgs[3]
 		if num, err5 := strconv.Atoi(input); err5 == nil {
@@ -85,18 +57,4 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 	}
 	return nil // all possible value of nArgs accounted for previously
 
-}
-
-func getProjects(path string) ([]os.FileInfo, error) {
-	var files, err = ioutil.ReadDir(path)
-	if err != nil {
-		return []os.FileInfo{}, err
-	}
-	var projects []os.FileInfo
-	for _, file := range files {
-		if file.IsDir() {
-			projects = append(projects, file)
-		}
-	}
-	return projects, nil
 }
