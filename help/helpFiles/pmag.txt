@@ -1,4 +1,4 @@
-pmag: Manage your local multilingual projects with a simple cli
+pmag: Manage your multilingual programming projects with a simple cli
 
 Common commands:
     pmag open go <project name>
