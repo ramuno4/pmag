@@ -13,6 +13,8 @@ import (
 	"github.com/Jon1105/pmag/utilities"
 	"github.com/Jon1105/pmag/vcs/git"
 	"github.com/Jon1105/pmag/vcs/github"
+
+	"github.com/otiai10/copy"
 )
 
 func Create(osArgs []string, flags []string, config conf.Config) error {
@@ -53,7 +55,7 @@ func Create(osArgs []string, flags []string, config conf.Config) error {
 			if err3 != nil {
 				return err3
 			}
-			var err4 = utilities.Copy(templatePath, projectPath)
+			var err4 = copy.Copy(templatePath, projectPath)
 			if err4 != nil {
 				return err4
 			}
