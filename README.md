@@ -19,14 +19,18 @@ defaultEditorPath: 'C:/Users/username/AppData/Local/Programs/Microsoft VS Code/b
 ```
 *More info about inidividual configuration options in config.yaml*
 
-#### Add to path
-* Run `go build` and add the created executable to your path so you can access it from any directory in the terminal
-
 #### Setup Github V3 api (optional)
 * Go to [github settings](https://github.com/settings/tokens) and sign in
 * Generate a new token and select "repo" to allow repository creation access
 * Copy generated token into `vcs/github/github.key`
 
+#### Add to path
+* Run `go build` and add the created executable to your path so you can access it from any directory in the terminal
+* If `%GOBIN%` is already in your path, you can simply run `go install` which will build the project and move the executable to `%GOBIN%`
+
+#### Delete project (optional)
+Thanks to the go:embed package, the created executable can be run standalone, so the other source, text and configuration files are no longer needed.
+You can therefore remove the pmag project from your computer while keeping the executable installed, which will continue to function as expected
 
 ## Usage
 ### Commands
