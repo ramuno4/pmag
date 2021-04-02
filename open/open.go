@@ -17,7 +17,7 @@ import (
 func Open(osArgs []string, flags []string, config conf.Config) error {
 	var nArgs int = len(osArgs)
 	if nArgs == 2 { // pmag open -> help.Help([pmag help open])
-		return help.Help([]string{osArgs[0], "help", osArgs[1]}, config)
+		return help.Help([]string{osArgs[0], "help", osArgs[1]})
 	}
 	var lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
 	if err1 != nil {

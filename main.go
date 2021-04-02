@@ -44,7 +44,7 @@ func main() {
 	// case "vcs":
 	// 	err2 = vcs.Vcs(args, flags, conf)
 	case "help":
-		err2 = help.Help(args, conf)
+		err2 = help.Help(args)
 	default:
 		log.Fatalf("invalid command %s\nUse `%s help` to see a list of commands", command, args[0])
 	}
