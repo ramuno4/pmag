@@ -14,8 +14,11 @@ languages:
     templatePath:
 
     # (optional) command to execute in terminal upon creation of the project
-    # can include {{projectName}} or {{projectPath}} variables which will be replaced by their respective values at runtime.
-    initialCommand:
+    # can include variables which will be replaced with their respective values at runtime. these include:
+    # {{projectName}} , {{projectPath}} , {{languageName}} , {{languageAcro}}
+
+    # As required by go's exec package, the first element of this list must be to an executable. The following arguments can be arguments, flags, ...
+    initialCommand: []
 
     # (optional) same as `defaultEditorPath` below but optional and language specific. This is the preferred editor path when specified
     editorPath:

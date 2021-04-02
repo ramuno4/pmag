@@ -11,7 +11,7 @@ type Language struct {
 	Acros          []string `yaml:"acros"`
 	Path           string   `yaml:"path"`
 	TemplatePath   string   `yaml:"templatePath"`
-	InitialCommand string   `yaml:"initialCommand"`
+	InitialCommand []string `yaml:"initialCommand"`
 	EditorPath     string   `yaml:"editorPath"`
 }
 
@@ -58,7 +58,7 @@ func (language Language) ToString() string {
 Acros: %v,
 Path: %q,
 TemplatePath: %q,
-InitialCommand: %s,
+InitialCommand: %v,
 EditorPath: %q
 `, language.Name, language.Acros, language.Path, language.TemplatePath, language.InitialCommand, language.EditorPath)
 }
