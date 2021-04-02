@@ -25,7 +25,7 @@ func GetLanguage(str string, languages []conf.Language) (conf.Language, error) {
 		}
 	}
 
-	return conf.Language{}, fmt.Errorf("invalid language name %s", str)
+	return conf.Language{}, fmt.Errorf("invalid language name %q", str)
 }
 
 func Contains(array []string, obj string) bool {
