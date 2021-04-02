@@ -20,9 +20,7 @@ defaultEditorPath: 'C:/Users/username/AppData/Local/Programs/Microsoft VS Code/b
 *More info about inidividual configuration options in config.yaml*
 
 #### Add to path
-Run from the base directory  
-`go install`  
-This will add `pmag.exe` (or other extension) to `%GOHOME%` which should be on the PATH and therefore you will be able to run `pmag` from any directory in the terminal
+* Run `go build` and add the created executable to your path so you can access it from any directory in the terminal
 
 #### Setup Github V3 api (optional)
 * Go to [github settings](https://github.com/settings/tokens) and sign in
