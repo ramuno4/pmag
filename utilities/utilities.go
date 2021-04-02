@@ -11,9 +11,29 @@ import (
 	"github.com/Jon1105/pmag/conf"
 )
 
+// String slice functions
+
 func Remove(slice []string, i int) []string {
 	fmt.Println(slice)
 	return append(slice[:i], slice[i+1:]...)
+}
+
+func Contains(slice []string, obj string) bool {
+	for _, val := range slice {
+		if val == obj {
+			return true
+		}
+	}
+	return false
+}
+
+func ContainsAny(slice []string, slice2 []string) bool {
+	for _, val := range slice {
+		if Contains(slice2, val) {
+			return true
+		}
+	}
+	return false
 }
 
 func GetLanguage(str string, languages []conf.Language) (conf.Language, error) {
@@ -28,23 +48,6 @@ func GetLanguage(str string, languages []conf.Language) (conf.Language, error) {
 	return conf.Language{}, fmt.Errorf("invalid language name %q", str)
 }
 
-func Contains(array []string, obj string) bool {
-	for _, val := range array {
-		if val == obj {
-			return true
-		}
-	}
-	return false
-}
-
-func ContainsAny(array []string, array2 []string) bool {
-	for _, val := range array {
-		if Contains(array2, val) {
-			return true
-		}
-	}
-	return false
-}
 
 func Open(projectPath, editorPath string) error {
 	return RunCommand("", editorPath, projectPath)
@@ -97,11 +100,11 @@ func RunCommand(dir, name string, arg ...string) error {
 	return cmd.Run()
 }
 
-func Filter(array []string, filter func(string) bool) ([]string, []string) {
+func Filter(slice []string, filter func(string) bool) ([]string, []string) {
 	var valid = []string{}
 	var invalid = []string{}
 
-	for _, v := range array {
+	for _, v := range slice {
 		if filter(v) {
 			valid = append(valid, v)
 		} else {
