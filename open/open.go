@@ -19,7 +19,20 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 	if nArgs == 3 { // pmag open flutter
 		var lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
 		if err1 != nil {
-			return err1
+			if config.InferLanguage {
+				var projectPath, lang, err1 = utilities.InferLanguage(osArgs, config)
+				if err1 != nil {
+					return fmt.Errorf("could not infer language. Please enter a language name for project %q", osArgs[2])
+				}
+
+				var editorPath, err2 = utilities.GetEditorPath(lang, config)
+				if err2 != nil {
+					return err2
+				}
+				return utilities.Open(projectPath, editorPath)
+			} else {
+				return fmt.Errorf("invalid language name %q.\nIf you wish %q to automatically infer the language for project %q, you may turn this feature on in config.yaml", osArgs[2], osArgs[0], osArgs[2])
+			}
 		}
 
 		var editorPath, err2 = utilities.GetEditorPath(lang, config)
@@ -38,12 +51,10 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 		return utilities.Open(projectPath, editorPath)
 
 	} else if nArgs > 3 { // pmag open flutter doit [extra arguments ignored]
-		var lang conf.Language
-		var err1 error
-		lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
+		var lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
 		if err1 != nil { // language not given
-			lang, err1 = utilities.InferLanguage(osArgs, config)
-		} 
+			return err1
+		}
 
 		var editorPath, err2 = utilities.GetEditorPath(lang, config)
 		if err2 != nil {

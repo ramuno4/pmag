@@ -22,6 +22,7 @@ type Config struct {
 	DefaultVcsState         bool       `yaml:"defaultVcsState"`
 	DefaultGithubVisibility bool       `yaml:"defaultGithubVisibility"`
 	DefaultCreateREADME     bool       `yaml:"defaultCreateREADME"`
+	InferLanguage           bool       `yaml:"inferLanguage"`
 }
 
 func GetConfig(yamlBytes []byte) (Config, error) {
@@ -69,6 +70,10 @@ func (config Config) ToString() string {
 		s += v.ToString()
 		s += "\n"
 	}
-	s += fmt.Sprintf("DebugEditorPath: %q", config.DefaultEditorPath)
+	s += fmt.Sprintf("DefaultEditorPath: %q\n", config.DefaultEditorPath)
+	s += fmt.Sprintf("DefaultVcsState: %t\n", config.DefaultVcsState)
+	s += fmt.Sprintf("DefaultGithubVisibility: %t\n", config.DefaultGithubVisibility)
+	s += fmt.Sprintf("DefaultCreateREADME: %t\n", config.DefaultCreateREADME)
+	s += fmt.Sprintf("InferLanguage: %t\n", config.InferLanguage)
 	return s
 }

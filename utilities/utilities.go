@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 
 	"github.com/Jon1105/pmag/conf"
@@ -46,11 +47,30 @@ func GetLanguage(str string, languages []conf.Language) (conf.Language, error) {
 	return conf.Language{}, fmt.Errorf("invalid language name %q", str)
 }
 
-func InferLanguage(osArgs []string, config conf.Config) (conf.Language, error) {
-	return conf.Language{}, nil
+func InferLanguage(osArgs []string, config conf.Config) (string, conf.Language, error) {
+	// osArgs = [pmag.exe open doit]
+	if len(osArgs) < 3 {
+		return "", conf.Language{}, fmt.Errorf("not enough arguments") // normally should not occur
+	}
+	var name = osArgs[2]
+
+	for _, lang := range config.Languages {
+		var projects, err = GetProjects(lang.Path)
+		if err != nil {
+			continue
+		}
+		for _, v := range projects {
+			if v.Name() == name {
+				return filepath.Join(lang.Path, v.Name()), lang, nil
+			}
+		}
+	}
+
+	return "", conf.Language{}, fmt.Errorf("could not infer project")
 }
 
 func Open(projectPath, editorPath string) error {
+
 	return RunCommand("", editorPath, projectPath)
 }
 
