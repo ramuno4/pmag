@@ -22,7 +22,7 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 			if config.InferLanguage {
 				var projectPath, lang, err1 = utilities.InferLanguage(osArgs, config)
 				if err1 != nil {
-					return fmt.Errorf("could not infer language. Please enter a language name for project %q", osArgs[2])
+					return fmt.Errorf("failed to infer language: project %q not found in any languages", osArgs[2])
 				}
 
 				var editorPath, err2 = utilities.GetEditorPath(lang, config)
