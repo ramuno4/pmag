@@ -1,1 +1,8 @@
-TODO fill in vcs.txt
+Initialize a version control system in a project
+
+Usage:
+    pmag vcs . [flags ...]
+
+    pmag vcs flutter doit [flags ...]
+    -p          Toggle visibility of the github repository created (if created)
+    

@@ -46,6 +46,10 @@ func GetLanguage(str string, languages []conf.Language) (conf.Language, error) {
 	return conf.Language{}, fmt.Errorf("invalid language name %q", str)
 }
 
+func InferLanguage(osArgs []string, config conf.Config) (conf.Language, error) {
+	return conf.Language{}, nil
+}
+
 func Open(projectPath, editorPath string) error {
 	return RunCommand("", editorPath, projectPath)
 }
