@@ -1,4 +1,5 @@
 # List of languages
+# It is recommended to order these from most to least used to reduce computation time when inferring the language. See `inferLanguage` below
 languages:
   - 
     # Name of the language, used for recognition purposes 
@@ -49,4 +50,8 @@ defaultGithubVisibility:
 # defaults to false
 defaultCreateREADME:
 
+
+# (optional) whether to infer the language when using open command from the project name. Can significantly increase computation time.
+# defaults to false 
+inferLanguage: 
 

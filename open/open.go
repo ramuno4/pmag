@@ -15,20 +15,22 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 	if nArgs == 2 { // pmag open -> help.Help([pmag help open])
 		return help.Help([]string{osArgs[0], "help", osArgs[1]})
 	}
-	var lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
-	if err1 != nil {
-		return err1
-	}
-	var editorPath, err2 = utilities.GetEditorPath(lang, config)
-	if err2 != nil {
-		return err2
-	}
 
-	var projects, err3 = utilities.GetProjects(lang.Path)
-	if err3 != nil {
-		return err3
-	}
 	if nArgs == 3 { // pmag open flutter
+		var lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
+		if err1 != nil {
+			return err1
+		}
+
+		var editorPath, err2 = utilities.GetEditorPath(lang, config)
+		if err2 != nil {
+			return err2
+		}
+
+		var projects, err3 = utilities.GetProjects(lang.Path)
+		if err3 != nil {
+			return err3
+		}
 		var projectPath, err4 = utilities.PickProject(lang, projects)
 		if err4 != nil {
 			return err4
@@ -36,6 +38,23 @@ func Open(osArgs []string, flags []string, config conf.Config) error {
 		return utilities.Open(projectPath, editorPath)
 
 	} else if nArgs > 3 { // pmag open flutter doit [extra arguments ignored]
+		var lang conf.Language
+		var err1 error
+		lang, err1 = utilities.GetLanguage(osArgs[2], config.Languages)
+		if err1 != nil { // language not given
+			lang, err1 = utilities.InferLanguage(osArgs, config)
+		} 
+
+		var editorPath, err2 = utilities.GetEditorPath(lang, config)
+		if err2 != nil {
+			return err2
+		}
+
+		var projects, err3 = utilities.GetProjects(lang.Path)
+		if err3 != nil {
+			return err3
+		}
+
 		var input string = osArgs[3]
 		if num, err5 := strconv.Atoi(input); err5 == nil {
 			if num <= len(projects) {
