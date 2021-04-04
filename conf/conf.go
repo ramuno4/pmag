@@ -18,6 +18,7 @@ type Language struct {
 type Config struct {
 	Languages               []Language `yaml:"languages"`
 	Vcs                     string     `yaml:"vcs"`
+	GhKey                   string     `yaml:"ghKey"`
 	DefaultEditorPath       string     `yaml:"defaultEditorPath"`
 	DefaultVcsState         bool       `yaml:"defaultVcsState"`
 	DefaultGithubVisibility bool       `yaml:"defaultGithubVisibility"`
@@ -70,6 +71,7 @@ func (config Config) ToString() string {
 		s += v.ToString()
 		s += "\n"
 	}
+	s += fmt.Sprintf("GithubKey: %q\n", config.GhKey)
 	s += fmt.Sprintf("DefaultEditorPath: %q\n", config.DefaultEditorPath)
 	s += fmt.Sprintf("DefaultVcsState: %t\n", config.DefaultVcsState)
 	s += fmt.Sprintf("DefaultGithubVisibility: %t\n", config.DefaultGithubVisibility)

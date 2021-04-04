@@ -75,10 +75,32 @@ func Create(osArgs []string, flags []string, config conf.Config) error {
 			case "git":
 				err6 = git.Git(projectPath)
 			case "github":
-				err6 = github.Github(projectPath, public)
+				if config.GhKey == "" {
+					err6 = fmt.Errorf("cannot use github vcs when ghKey config variable is unset. please update config.yaml")
+					break
+				}
+				err6 = github.Github(config.GhKey, projectPath, public)
 			}
 			if err6 != nil {
 				return err6
+			}
+		}
+
+		if len(lang.InitialCommand) != 0 {
+			var mappings = map[string]string{
+				"projectName":  projectName,
+				"projectPath":  projectPath,
+				"languageName": lang.Name,
+				"languageAcro": osArgs[2], // acronym used to indentify the language
+			}
+			var command, err7 = parseCommand(lang.InitialCommand, mappings)
+			if err7 != nil {
+				return err7
+			}
+
+			var err8 = utilities.RunCommand(projectPath, command[0], command[1:]...)
+			if err8 != nil {
+				return err8
 			}
 		}
 		return utilities.Open(projectPath, editorPath)

@@ -13,10 +13,8 @@ import (
 	"golang.org/x/oauth2"
 )
 
-//go:embed github.key
-var key string
 
-func createRepo(repoName string, private bool) (*github.Repository, error) {
+func createRepo(key, repoName string, private bool) (*github.Repository, error) {
 	ts := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: key},
 	)
@@ -32,11 +30,11 @@ func createRepo(repoName string, private bool) (*github.Repository, error) {
 	return resRepo, err2
 }
 
-func Github(projectPath string, private bool) error {
+func Github(key, projectPath string, private bool) error {
 	if err1 := git.Git(projectPath); err1 != nil {
 		return err1
 	}
-	repo, err2 := createRepo(filepath.Base(projectPath), private)
+	repo, err2 := createRepo(key, filepath.Base(projectPath), private)
 	if err2 != nil {
 		return err2
 	}

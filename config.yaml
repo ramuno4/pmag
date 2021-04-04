@@ -1,3 +1,7 @@
+### THIS FILE CONTAINS USER SPECIFIC DATA AND SHOULD NOT BE SHARED.
+### DO NOT COMMIT THIS FILE TO GITHUB OR ANY OTHER PUBLIC SOURCE CONTROL REPOSITORIES
+
+
 # List of languages
 # It is recommended to order these from most to least used to reduce computation time when inferring the language. See `inferLanguage` below
 languages:
@@ -5,14 +9,18 @@ languages:
     # Name of the language, used for recognition purposes 
     name:
 
+
     # strings used to select language in arguments. i.e. pmag *py*
     acros: []
+
 
     # path to projects folder of this language
     path:
 
+
     # (optional) path to the example directory that is copied when a new project is created
     templatePath:
+
 
     # (optional) command to execute in terminal upon creation of the project
     # can include variables which will be replaced with their respective values at runtime. these include:
@@ -21,12 +29,18 @@ languages:
     # As required by go's exec package, the first element of this list must be to an executable. The following arguments can be arguments, flags, ...
     initialCommand: []
 
+
     # (optional) same as `defaultEditorPath` below but optional and language specific. This is the preferred editor path when specified
     editorPath:
+
+# (optional) github secret to allow pmag to create repositories on your behalf. Follow setup instructions in README.md to generate this key
+ghKey: 
+
 
 # (optional) version control system to initialize upon creation of a new project
 # Currently only github and git are supported
 vcs:
+
 
 # DEFAULTS
 
@@ -36,10 +50,12 @@ vcs:
 # $ {{defaultEditorPath}} {{projectPath}}     
 defaultEditorPath:
 
+
 # (optional) whether the version control system is enabled by default:
 # this will determine whether the -v tag will turn on or off vcs
 # defaults to false
 defaultVcsState: 
+
 
 # (optional) whether a created github repository will default to public (true) or private(false)
 # defaults to false
@@ -49,9 +65,3 @@ defaultGithubVisibility:
 # (optional) whether creation of a README.md file is enabled by default
 # defaults to false
 defaultCreateREADME:
-
-
-# (optional) whether to infer the language when using open command from the project name. Can significantly increase computation time.
-# defaults to false 
-inferLanguage: 
-
