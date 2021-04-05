@@ -52,15 +52,11 @@ Usage:
     pmag help [command]
 
 ## Project Structure
-### `./conf`
+#### `./conf`
 Package to manage reading and accessing data from `config.yaml`
-### `./cmd`
+#### `./cmd`
 Package for cobra package
-### `./utilities`
+#### `./utilities`
 Package for multiple use functions throughout the application
-### `./vcs`
+#### `./vcs`
 Package for managing the vcs command
-#### `./vcs/git`
-Package for managing creation of git vcs
-#### `./vcs/github`
-Package for managing creation of github vcs
