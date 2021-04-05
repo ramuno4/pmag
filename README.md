@@ -11,7 +11,7 @@ languages:
   - 
     name: 'Go'
     acros: ['go', 'golang']
-    path: '%GOPATH%/src/github.com/Jon1105'
+    path: 'C:/Users/username/Documents/Programming/Go/src/github.com/Jon1105'
     templatePath: 'templates/Go'
     initialCommand: 'go mod init github.com/Jon1105/{{projectName}}'
 
@@ -55,7 +55,7 @@ Usage:
 ### `./conf`
 Package to manage reading and accessing data from `config.yaml`
 ### `./cmd`
-
+Package for cobra package
 ### `./utilities`
 Package for multiple use functions throughout the application
 ### `./vcs`
