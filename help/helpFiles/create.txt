@@ -1,7 +1,0 @@
-Create a project and open it in your editor of choice
-
-Usage:
-    pmag create <language> <project name> [flags...]
-    -r, -readme Toggle creation a README.md file
-    -v, -vcs    Toggle initialization a version control system (git, github)
-    -p          Toggle visibility of the github repository created (if created)

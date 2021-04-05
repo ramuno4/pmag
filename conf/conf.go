@@ -52,30 +52,9 @@ func validateData(config Config) (Config, error) {
 		return Config{}, fmt.Errorf("DefaultEditorPath must not be empty. Please update config.yaml")
 	}
 
-	return config, nil
-}
-
-func (language Language) ToString() string {
-	return fmt.Sprintf(`Name: %s,
-Acros: %v,
-Path: %q,
-TemplatePath: %q,
-InitialCommand: %v,
-EditorPath: %q
-`, language.Name, language.Acros, language.Path, language.TemplatePath, language.InitialCommand, language.EditorPath)
-}
-
-func (config Config) ToString() string {
-	var s string = ""
-	for _, v := range config.Languages {
-		s += v.ToString()
-		s += "\n"
+	if config.GhKey == "" && config.Vcs == "github" {
+		return Config{}, fmt.Errorf("ghKey must be set to use github version control system. Please update config.yaml")
 	}
-	s += fmt.Sprintf("GithubKey: %q\n", config.GhKey)
-	s += fmt.Sprintf("DefaultEditorPath: %q\n", config.DefaultEditorPath)
-	s += fmt.Sprintf("DefaultVcsState: %t\n", config.DefaultVcsState)
-	s += fmt.Sprintf("DefaultGithubVisibility: %t\n", config.DefaultGithubVisibility)
-	s += fmt.Sprintf("DefaultCreateREADME: %t\n", config.DefaultCreateREADME)
-	s += fmt.Sprintf("InferLanguage: %t\n", config.InferLanguage)
-	return s
+
+	return config, nil
 }

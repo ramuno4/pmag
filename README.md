@@ -30,6 +30,7 @@ defaultEditorPath: 'C:/Users/username/AppData/Local/Programs/Microsoft VS Code/b
 
 #### Delete project (optional)
 Thanks to the go:embed package, the created executable can be run standalone, so the source, text and configuration files are no longer needed on the machine running the tool.
+Note: this does not include the templates for each language. These must be remain on the machine for proper functionality of the template feature
 You can therefore remove the pmag project from your computer while keeping the executable installed, which will continue to function as expected
 
 ## Usage
@@ -53,12 +54,8 @@ Usage:
 ## Project Structure
 ### `./conf`
 Package to manage reading and accessing data from `config.yaml`
-### `./create`
-Package to manage create command
-### `./help`
-Package to manage help command
-### `./open`
-Package to manage open command
+### `./cmd`
+
 ### `./utilities`
 Package for multiple use functions throughout the application
 ### `./vcs`

@@ -4,52 +4,23 @@ import (
 	_ "embed"
 	"log"
 
-	"os"
-
+	"github.com/Jon1105/pmag/cmd"
 	"github.com/Jon1105/pmag/conf"
-	"github.com/Jon1105/pmag/create"
-	"github.com/Jon1105/pmag/help"
-	"github.com/Jon1105/pmag/open"
-	"github.com/Jon1105/pmag/utilities"
-	// "github.com/Jon1105/pmag/vcs"
 )
 
 //go:embed config.yaml
-var configYaml []byte
+var configBytes []byte
+
+var config conf.Config
 
 func main() {
-	var conf, err = conf.GetConfig(configYaml)
+	var err error
+	config, err = conf.GetConfig(configBytes)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err.Error())
 	}
 
-	var osArgs []string = os.Args
+	cmd.Config = &config
 
-	if len(osArgs) == 1 {
-		osArgs = append(osArgs, "help")
-	}
-	var args, flags = utilities.Filter(osArgs, func(str string) bool {
-		return str[:1] != "-"
-	})
-
-	var command string = args[1]
-
-	var err2 error
-
-	switch command {
-	case "create":
-		err2 = create.Create(args, flags, conf)
-	case "open":
-		err2 = open.Open(args, flags, conf)
-	// case "vcs":
-	// 	err2 = vcs.Vcs(args, flags, conf)
-	case "help":
-		err2 = help.Help(args)
-	default:
-		log.Fatalf("invalid command %s\nUse `%s help` to see a list of commands", command, args[0])
-	}
-
-	if err2 != nil {
-		log.Fatal(err2)
-	}
+	cmd.Execute()
 }
