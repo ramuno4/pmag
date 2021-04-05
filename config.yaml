@@ -10,7 +10,7 @@ languages:
     name:
 
 
-    # strings used to select language in arguments. i.e. pmag *py*
+    # strings used to select language in arguments.
     acros: []
 
 
@@ -24,7 +24,7 @@ languages:
 
     # (optional) command to execute in terminal upon creation of the project
     # can include variables which will be replaced with their respective values at runtime. these include:
-    # {{projectName}} , {{projectPath}} , {{languageName}} , {{languageAcro}}
+    # {{projectName}} , {{projectPath}} , {{languageName}}
 
     # As required by go's exec package, the first element of this list must be to an executable. The following arguments can be arguments, flags, ...
     initialCommand: []
@@ -47,7 +47,7 @@ vcs:
 # path to the script or executable to open editor of choice
 # i.e. C:/path/to/Code.exe
 # Note, this script or executable should open a folder when run with the following command structure:
-# $ {{defaultEditorPath}} {{projectPath}}     
+# ${{defaultEditorPath}} {{projectPath}}     
 defaultEditorPath:
 
 
