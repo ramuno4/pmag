@@ -25,7 +25,7 @@ var (
 var createCommand = &cobra.Command{
 	Use:     "create",
 	Aliases: []string{"new"},
-	Short:   "create a new project",
+	Short:   "Create a new project",
 	Long:    "", // TODO
 	Example: "pmag create go <project name>",
 	Args:    cobra.ExactArgs(2),

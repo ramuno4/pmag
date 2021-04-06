@@ -11,7 +11,7 @@ import (
 
 var openCommand = &cobra.Command{
 	Use:     "open",
-	Short:   "open an existing project",
+	Short:   "Open an existing project",
 	Long:    "", // TODO
 	Example: "pmag open go <project name>\npmag create go",
 	Args:    cobra.RangeArgs(1, 2),
