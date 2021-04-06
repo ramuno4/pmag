@@ -20,7 +20,7 @@ var (
 	ghVisibility bool
 )
 
-var create = &cobra.Command{
+var createCommand = &cobra.Command{
 	Use:     "create",
 	Aliases: []string{"new"},
 	Short:   "create a new project",
@@ -96,11 +96,11 @@ var create = &cobra.Command{
 
 func createCmd() *cobra.Command {
 	// TODO fill in usage
-	create.Flags().BoolVarP(&readme, "readme", "r", Config.DefaultCreateREADME, "")
-	create.Flags().BoolVarP(&vcsState, "vcs", "v", Config.DefaultVcsState, "")
-	create.Flags().BoolVarP(&ghVisibility, "public", "p", Config.DefaultGithubVisibility, "")
+	createCommand.Flags().BoolVarP(&readme, "readme", "r", Config.DefaultCreateREADME, "")
+	createCommand.Flags().BoolVarP(&vcsState, "vcs", "v", Config.DefaultVcsState, "")
+	createCommand.Flags().BoolVarP(&ghVisibility, "public", "p", Config.DefaultGithubVisibility, "")
 
-	return create
+	return createCommand
 }
 
 func parseCommand(command []string, mappings map[string]string) ([]string, error) {

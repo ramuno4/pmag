@@ -9,7 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var open = &cobra.Command{
+var openCommand = &cobra.Command{
 	Use:     "open",
 	Short:   "open an existing project",
 	Long:    "", // TODO
@@ -89,5 +89,5 @@ var open = &cobra.Command{
 }
 
 func openCmd() *cobra.Command {
-	return open
+	return openCommand
 }
