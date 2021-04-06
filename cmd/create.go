@@ -15,9 +15,11 @@ import (
 )
 
 var (
-	readme       bool
-	vcsState     bool
-	ghVisibility bool
+	readmeFlag       bool
+	vcsStateFlag     bool
+	gitFlag          bool
+	githubFlag       bool
+	ghVisibilityFlag bool
 )
 
 var createCommand = &cobra.Command{
@@ -53,7 +55,7 @@ var createCommand = &cobra.Command{
 			os.Mkdir(projectPath, 0755)
 		}
 
-		if readme { // Create Readme
+		if readmeFlag { // Create Readme
 			var contents string = fmt.Sprintf("# %v\n---\n", strings.Title(projectName))
 			var readmePath = filepath.Join(projectPath, "README.md")
 			var err5 = ioutil.WriteFile(readmePath, []byte(contents), 0777)
@@ -62,13 +64,14 @@ var createCommand = &cobra.Command{
 			}
 		}
 
-		if vcsState {
+		if vcsStateFlag {
 			var err6 error
-			switch Config.Vcs {
-			case "git":
+			if githubFlag {
+				err6 = vcs.Github(Config.GhKey, projectPath, ghVisibilityFlag)
+			} else if gitFlag {
 				err6 = vcs.Git(projectPath)
-			case "github":
-				err6 = vcs.Github(Config.GhKey, projectPath, ghVisibility)
+			} else {
+				err6 = fmt.Errorf("vcs used but no version control system set in config.yaml or through flags. please update config.yaml or use the --git or --github flags")
 			}
 			if err6 != nil {
 				return err6
@@ -96,9 +99,11 @@ var createCommand = &cobra.Command{
 
 func createCmd() *cobra.Command {
 	// TODO fill in usage
-	createCommand.Flags().BoolVarP(&readme, "readme", "r", Config.DefaultCreateREADME, "")
-	createCommand.Flags().BoolVarP(&vcsState, "vcs", "v", Config.DefaultVcsState, "")
-	createCommand.Flags().BoolVarP(&ghVisibility, "public", "p", Config.DefaultGithubVisibility, "")
+	createCommand.Flags().BoolVarP(&readmeFlag, "readme", "r", Config.DefaultCreateREADME, "")
+	createCommand.Flags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "")
+	createCommand.Flags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
+	createCommand.Flags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
+	createCommand.Flags().BoolVarP(&githubFlag, "github", "gh", Config.Vcs == "github", "")
 
 	return createCommand
 }
