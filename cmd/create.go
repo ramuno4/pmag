@@ -103,7 +103,7 @@ func createCmd() *cobra.Command {
 	createCommand.Flags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "")
 	createCommand.Flags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
 	createCommand.Flags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	createCommand.Flags().BoolVarP(&githubFlag, "github", "gh", Config.Vcs == "github", "")
+	createCommand.Flags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
 
 	return createCommand
 }

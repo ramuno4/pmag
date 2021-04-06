@@ -30,7 +30,7 @@ var vcsCommand = &cobra.Command{
 
 func vcsCmd() *cobra.Command {
 	vcsCommand.Flags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	vcsCommand.Flags().BoolVarP(&githubFlag, "github", "gh", Config.Vcs == "github", "")
+	vcsCommand.Flags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
 	vcsCommand.Flags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
 	return vcsCommand
 }
