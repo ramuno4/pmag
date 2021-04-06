@@ -26,11 +26,12 @@ var vcsCommand = &cobra.Command{
 			return fmt.Errorf("vcs used but no version control system set in config.yaml or through flags. please update config.yaml or use the --git or --github flags")
 		}
 	},
+	
 }
 
 func vcsCmd() *cobra.Command {
-	vcsCommand.Flags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	vcsCommand.Flags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
-	vcsCommand.Flags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
+	vcsCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
+	vcsCommand.PersistentFlags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
+	vcsCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
 	return vcsCommand
 }

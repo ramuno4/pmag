@@ -15,11 +15,8 @@ import (
 )
 
 var (
-	readmeFlag       bool
-	vcsStateFlag     bool
-	gitFlag          bool
-	githubFlag       bool
-	ghVisibilityFlag bool
+	readmeFlag   bool
+	vcsStateFlag bool
 )
 
 var createCommand = &cobra.Command{
@@ -99,11 +96,11 @@ var createCommand = &cobra.Command{
 
 func createCmd() *cobra.Command {
 	// TODO fill in usage
-	createCommand.Flags().BoolVarP(&readmeFlag, "readme", "r", Config.DefaultCreateREADME, "")
-	createCommand.Flags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "")
-	createCommand.Flags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
-	createCommand.Flags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	createCommand.Flags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
+	createCommand.PersistentFlags().BoolVarP(&readmeFlag, "readme", "r", Config.DefaultCreateREADME, "")
+	createCommand.PersistentFlags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "")
+	createCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
+	createCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
+	createCommand.PersistentFlags().BoolVarP(&githubFlag, "github", "h", Config.Vcs == "github", "")
 
 	return createCommand
 }

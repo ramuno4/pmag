@@ -15,6 +15,12 @@ var rootCmd = &cobra.Command{
 	Example: "pmag create golang <project name> -vcs -readme",
 }
 
+var ( // Flag variables
+	gitFlag          bool
+	githubFlag       bool
+	ghVisibilityFlag bool
+)
+
 func Execute() {
 	rootCmd.AddCommand(
 		createCmd(),
