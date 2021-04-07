@@ -4,5 +4,4 @@
 - Arduino
   - Rename the created file
   - Open the ide correctly
-- Vcs command
 - Delete command
