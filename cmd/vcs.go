@@ -19,7 +19,7 @@ var vcsCommand = &cobra.Command{
 			return fmt.Errorf("could not retrieve the current project path")
 		}
 		if githubFlag {
-			return vcs.Github(Config.GhKey, dir, ghVisibilityFlag)
+			return vcs.Github(Config.GhKey, dir, !ghVisibilityFlag)
 		} else if gitFlag {
 			return vcs.Git(dir)
 		} else {
@@ -29,8 +29,8 @@ var vcsCommand = &cobra.Command{
 }
 
 func vcsCmd() *cobra.Command {
-	vcsCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	vcsCommand.PersistentFlags().BoolVar(&githubFlag, "github", Config.Vcs == "github", "")
-	vcsCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
+	vcsCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "Use git as the version control system")
+	vcsCommand.PersistentFlags().BoolVar(&githubFlag, "github", Config.Vcs == "github", "Use github as the version control system")
+	vcsCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "If github is used, make the created repository public")
 	return vcsCommand
 }

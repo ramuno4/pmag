@@ -64,7 +64,7 @@ var createCommand = &cobra.Command{
 		if vcsStateFlag {
 			var err6 error
 			if githubFlag {
-				err6 = vcs.Github(Config.GhKey, projectPath, ghVisibilityFlag)
+				err6 = vcs.Github(Config.GhKey, projectPath, !ghVisibilityFlag)
 			} else if gitFlag {
 				err6 = vcs.Git(projectPath)
 			} else {
@@ -96,11 +96,11 @@ var createCommand = &cobra.Command{
 
 func createCmd() *cobra.Command {
 	// TODO fill in usage
-	createCommand.PersistentFlags().BoolVarP(&readmeFlag, "readme", "r", Config.DefaultCreateREADME, "")
-	createCommand.PersistentFlags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "")
-	createCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "")
-	createCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "")
-	createCommand.PersistentFlags().BoolVar(&githubFlag, "github", Config.Vcs == "github", "")
+	createCommand.PersistentFlags().BoolVarP(&readmeFlag, "readme", "r", Config.DefaultCreateREADME, "Create a README.md file for the new project")
+	createCommand.PersistentFlags().BoolVarP(&vcsStateFlag, "vcs", "v", Config.DefaultVcsState, "Initialize a version control system")
+	createCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "Use git as the version control system")
+	createCommand.PersistentFlags().BoolVar(&githubFlag, "github", Config.Vcs == "github", "Use github as the version control system")
+	createCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "If github is used, make the created repository public")
 
 	return createCommand
 }
