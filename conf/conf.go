@@ -18,12 +18,12 @@ type Language struct {
 type Config struct {
 	Languages               []Language `yaml:"languages"`
 	Vcs                     string     `yaml:"vcs"`
+	InferLanguage           bool       `yaml:"inferLanguage"`
 	GhKey                   string     `yaml:"ghKey"`
 	DefaultEditorPath       string     `yaml:"defaultEditorPath"`
 	DefaultVcsState         bool       `yaml:"defaultVcsState"`
 	DefaultGithubVisibility bool       `yaml:"defaultGithubVisibility"`
 	DefaultCreateREADME     bool       `yaml:"defaultCreateREADME"`
-	InferLanguage           bool       `yaml:"inferLanguage"`
 }
 
 func GetConfig(yamlBytes []byte) (Config, error) {

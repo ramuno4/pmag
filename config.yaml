@@ -33,13 +33,19 @@ languages:
     # (optional) same as `defaultEditorPath` below but optional and language specific. This is the preferred editor path when specified
     editorPath:
 
-# (optional) github secret to allow pmag to create repositories on your behalf. Follow setup instructions in README.md to generate this key
-ghKey: 
-
 
 # (optional) version control system to initialize upon creation of a new project
 # Currently only github and git are supported
 vcs:
+
+
+# (optional) whether to search all project folders for the project specified when no language (or an invalid one) is specified
+# defaults to false
+inferLanguage:
+
+
+# (optional) github secret to allow pmag to create repositories on your behalf. Follow setup instructions in README.md to generate this key
+ghKey: 
 
 
 # DEFAULTS
