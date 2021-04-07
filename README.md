@@ -59,4 +59,4 @@ Package for cobra package
 #### `./utilities`
 Package for multiple use functions throughout the application
 #### `./vcs`
-Package for managing the vcs command
+Package for managing version control systems
