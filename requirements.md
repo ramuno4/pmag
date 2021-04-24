@@ -5,3 +5,4 @@
   - Rename the created file
   - Open the ide correctly
 - Delete command
+- Open github page on vcs start
