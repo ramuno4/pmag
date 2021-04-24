@@ -12,7 +12,8 @@ var vcsCommand = &cobra.Command{
 	Use:   "vcs",
 	Short: "Initialize a version control system in your current directory",
 	Long:  "", // TODO,
-	Args:  cobra.RangeArgs(0, 1),
+	Example: "pmag vcs --github -p",
+	Args:  cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var dir, err = os.Getwd()
 		if err != nil {
