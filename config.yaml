@@ -71,3 +71,7 @@ defaultGithubVisibility:
 # (optional) whether creation of a README.md file is enabled by default
 # defaults to false
 defaultCreateREADME:
+
+# (optional) whether creation of a requirements.md file is enabled by default
+# defaults to false
+defaultCreateRequirements:

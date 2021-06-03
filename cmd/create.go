@@ -15,8 +15,9 @@ import (
 )
 
 var (
-	readmeFlag   bool
-	vcsStateFlag bool
+	readmeFlag       bool
+	requirementsFlag bool
+	vcsStateFlag     bool
 )
 
 var createCommand = &cobra.Command{
@@ -55,12 +56,19 @@ var createCommand = &cobra.Command{
 		if readmeFlag { // Create Readme
 			var contents string = fmt.Sprintf("# %v\n---\n", strings.Title(projectName))
 			var readmePath = filepath.Join(projectPath, "README.md")
-			var err5 = ioutil.WriteFile(readmePath, []byte(contents), 0777)
-			if err5 != nil {
-				return err5
+			if err := ioutil.WriteFile(readmePath, []byte(contents), 0777); err != nil {
+				return fmt.Errorf("unable to create README file")
 			}
 		}
 
+		if requirementsFlag { // Create Requirements
+			var contents string = fmt.Sprintf("# %v\n---\n", strings.Title(projectName))
+			var requirementsPath = filepath.Join(projectPath, "Requirements.md")
+			if err := ioutil.WriteFile(requirementsPath, []byte(contents), 0777); err != nil {
+				return fmt.Errorf("unable to create Requirements file")
+			}
+		}
+		
 		if vcsStateFlag {
 			var err6 error
 			if githubFlag {
@@ -101,6 +109,7 @@ func createCmd() *cobra.Command {
 	createCommand.PersistentFlags().BoolVarP(&gitFlag, "git", "g", Config.Vcs == "git", "Use git as the version control system")
 	createCommand.PersistentFlags().BoolVar(&githubFlag, "github", Config.Vcs == "github", "Use github as the version control system")
 	createCommand.PersistentFlags().BoolVarP(&ghVisibilityFlag, "public", "p", Config.DefaultGithubVisibility, "If github is used, make the created repository public")
+	createCommand.PersistentFlags().BoolVarP(&requirementsFlag, "requirements", "q", Config.DefaultCreateRequirements, "Create a Requirements.md file for the new project")
 
 	return createCommand
 }
