@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"path/filepath"
 	"strconv"
@@ -21,18 +22,22 @@ var openCommand = &cobra.Command{
 			if err1 != nil {
 				if Config.InferLanguage {
 					var projectPath, lang, err1 = utilities.InferLanguage(args, Config)
-					if err1 != nil {
-						return fmt.Errorf("failed to infer language: project %q not found in any languages", args[0])
+					if err1 == nil {
+						// return fmt.Errorf("failed to infer language: project %q not found in any languages", args[0])
+						var editorPath, err2 = utilities.GetEditorPath(lang.EditorPath, Config.DefaultEditorPath)
+						if err2 != nil {
+							return err2
+						}
+						return utilities.Open(projectPath, editorPath)
 					}
-
-					var editorPath, err2 = utilities.GetEditorPath(lang.EditorPath, Config.DefaultEditorPath)
-					if err2 != nil {
-						return err2
-					}
-					return utilities.Open(projectPath, editorPath)
-				} else {
-					return fmt.Errorf("invalid language name %q.\nIf you wish \"pmag open\" to automatically infer the language for project %q, you may turn this feature on in config.yaml", args[0], args[0])
 				}
+
+				var emsg = fmt.Sprintf("invalid language name %q.", args[0])
+				if !Config.InferLanguage {
+					emsg += fmt.Sprintf("\nIf you wish \"pmag open\" to automatically infer the language for project %q, you may turn this feature on in config.yaml", args[0])
+				}
+				return errors.New(emsg)
+
 			}
 
 			var projects, err3 = utilities.GetProjects(lang.Path)
