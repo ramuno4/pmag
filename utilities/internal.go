@@ -41,7 +41,15 @@ func InferLanguage(args []string, config *conf.Config) (string, conf.Language, e
 }
 
 func Open(projectPath, editorPath string) error {
-	return RunCommand("", editorPath, projectPath)
+	// if strings.HasSuffix(editorPath, "/bin/code") {
+	// 	return fmt.Errorf("Project at path %q cannot be opened Visual Studio Code, due to inefficient energy consumption.", projectPath)
+	// } else
+	if strings.HasSuffix(editorPath, "Visual Studio Code.app") {
+		fmt.Print("opening ", projectPath, " with ", editorPath)
+		return RunCommand("", "open", editorPath)
+	} else {
+		return RunCommand("", editorPath, projectPath)
+	}
 }
 
 func GetEditorPath(langPath, defaultPath string) (string, error) {
@@ -53,4 +61,3 @@ func GetEditorPath(langPath, defaultPath string) (string, error) {
 		return "", fmt.Errorf("DefaultEditorPath must not be empty")
 	}
 }
-

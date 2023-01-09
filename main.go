@@ -8,7 +8,7 @@ import (
 	"github.com/Jon1105/pmag/conf"
 )
 
-//go:embed config.yaml
+//go:embed configEx.yaml
 var configBytes []byte
 
 var config conf.Config
