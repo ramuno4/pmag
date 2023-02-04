@@ -4,7 +4,7 @@
 - Arduino
   - Rename the created file
   - Open the ide correctly
-- Delete command
 - Open github page on vcs start
 - enforce camel case in rust for example
 - auto format for flutter
+- automatically enable certain extensions
