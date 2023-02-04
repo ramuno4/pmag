@@ -7,6 +7,7 @@ require (
 	github.com/otiai10/copy v1.9.0
 	github.com/spf13/cobra v1.6.1
 	golang.org/x/oauth2 v0.4.0
+	golang.org/x/text v0.6.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 

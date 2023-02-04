@@ -2,10 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 
 	"github.com/Jon1105/pmag/utilities"
 	"github.com/Jon1105/pmag/vcs"
@@ -53,22 +55,24 @@ var createCommand = &cobra.Command{
 			os.Mkdir(projectPath, 0755)
 		}
 
+		var title = cases.Title(language.AmericanEnglish).String(projectName)
+
 		if readmeFlag { // Create Readme
-			var contents string = fmt.Sprintf("# %v\n---\n", strings.Title(projectName))
+			var contents string = fmt.Sprintf("# %v\n---\n", title)
 			var readmePath = filepath.Join(projectPath, "README.md")
-			if err := ioutil.WriteFile(readmePath, []byte(contents), 0777); err != nil {
+			if err := os.WriteFile(readmePath, []byte(contents), 0777); err != nil {
 				return fmt.Errorf("unable to create README file")
 			}
 		}
 
 		if requirementsFlag { // Create Requirements
-			var contents string = fmt.Sprintf("# %v\n---\n", strings.Title(projectName))
+			var contents string = fmt.Sprintf("# %v\n---\n", title)
 			var requirementsPath = filepath.Join(projectPath, "Requirements.md")
-			if err := ioutil.WriteFile(requirementsPath, []byte(contents), 0777); err != nil {
+			if err := os.WriteFile(requirementsPath, []byte(contents), 0777); err != nil {
 				return fmt.Errorf("unable to create Requirements file")
 			}
 		}
-		
+
 		if vcsStateFlag {
 			var err6 error
 			if githubFlag {
@@ -98,7 +102,7 @@ var createCommand = &cobra.Command{
 				return err8
 			}
 		}
-		return utilities.Open(projectPath, editorPath)
+		return utilities.Open(projectPath, editorPath, Config.DisableExtensions)
 	},
 }
 
