@@ -1,5 +1,4 @@
-vcs/github/github.key
-*.exe
+*.key
 templates/*
 configEx.yaml
 pmag
