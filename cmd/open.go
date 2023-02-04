@@ -28,7 +28,7 @@ var openCommand = &cobra.Command{
 						if err2 != nil {
 							return err2
 						}
-						return utilities.Open(projectPath, editorPath)
+						return utilities.Open(projectPath, editorPath, Config.DisableExtensions)
 					}
 				}
 
@@ -53,7 +53,7 @@ var openCommand = &cobra.Command{
 			if err2 != nil {
 				return err2
 			}
-			return utilities.Open(projectPath, editorPath)
+			return utilities.Open(projectPath, editorPath, Config.DisableExtensions)
 		} else {
 			if err1 != nil { // language not given
 				return err1
@@ -72,7 +72,7 @@ var openCommand = &cobra.Command{
 			var input string = args[1]
 			if num, err5 := strconv.Atoi(input); err5 == nil {
 				if num <= len(projects) {
-					return utilities.Open(filepath.Join(lang.Path, projects[num-1].Name()), editorPath)
+					return utilities.Open(filepath.Join(lang.Path, projects[num-1].Name()), editorPath, Config.DisableExtensions)
 				}
 				return fmt.Errorf("project index out of range: projects[%d]; Max: %d", num, len(projects))
 
@@ -83,7 +83,7 @@ var openCommand = &cobra.Command{
 				return err6
 			}
 			if exists {
-				return utilities.Open(path, editorPath)
+				return utilities.Open(path, editorPath, Config.DisableExtensions)
 			} else if !exists {
 				return fmt.Errorf("%q does not exist\nUse \"pmag create\" to create a project", path)
 			}

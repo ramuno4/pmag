@@ -40,13 +40,15 @@ func InferLanguage(args []string, config *conf.Config) (string, conf.Language, e
 	return "", conf.Language{}, fmt.Errorf("could not infer project")
 }
 
-func Open(projectPath, editorPath string) error {
+func Open(projectPath, editorPath string, disableExtensions bool) error {
 	// if strings.HasSuffix(editorPath, "/bin/code") {
 	// 	return fmt.Errorf("Project at path %q cannot be opened Visual Studio Code, due to inefficient energy consumption.", projectPath)
 	// } else
 	if strings.HasSuffix(editorPath, "Visual Studio Code.app") {
 		fmt.Print("opening ", projectPath, " with ", editorPath)
 		return RunCommand("", "open", editorPath)
+	} else if disableExtensions {
+		return RunCommand("", editorPath, projectPath, "--disable-extensions")
 	} else {
 		return RunCommand("", editorPath, projectPath)
 	}

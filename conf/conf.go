@@ -25,6 +25,7 @@ type Config struct {
 	DefaultGithubVisibility   bool       `yaml:"defaultGithubVisibility"`
 	DefaultCreateREADME       bool       `yaml:"defaultCreateREADME"`
 	DefaultCreateRequirements bool       `yaml:"defaultCreateRequirements"`
+	DisableExtensions         bool       `yaml:"disableExtensions"`
 }
 
 func GetConfig(yamlBytes []byte) (Config, error) {
@@ -40,7 +41,8 @@ func GetConfig(yamlBytes []byte) (Config, error) {
 }
 
 // used to check whether values entered in configPath are valid
-// 	i.e Language.Path != "" ...
+//
+//	i.e Language.Path != "" ...
 func validateData(config Config) (Config, error) {
 	for _, v := range config.Languages {
 		if v.Path == "" {
